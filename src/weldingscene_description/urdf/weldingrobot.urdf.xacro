@@ -4,11 +4,8 @@
   <xacro:ur5_robot prefix="" joint_limited="true"/>
 
   <xacro:include filename="$(find realsense2_description)/urdf/_d415.urdf.xacro" />
- 
 
-
-
- <link name="world"/>
+  <link name="world"/>
 
   <joint name="world_to_robot" type="fixed">
     <parent link="world"/>
@@ -16,74 +13,53 @@
     <origin xyz="0 0 0" rpy="0.0 0.0 0"/>
   </joint>
 
-
-
-
-
-
-
-
-
-
-
-
-
   <xacro:sensor_d415 parent="tool0">
-    <origin xyz="0.0 -0.102 0.062" rpy="0 ${-pi/2} ${pi/2}"/>   
+    <origin xyz="0.0 -0.102 0.062" rpy="0 ${-pi/2} ${pi/2}"/>
   </xacro:sensor_d415>
- 
 
-    <link name="welding_torch">
-      <visual>
-        <geometry>
-          <mesh filename="package://weldingscene_description/meshes/collision/torch.stl" scale="0.001 0.001 0.001"/>
-        </geometry>
-        <origin rpy="${pi/2} -0.84997 ${-pi/2}" xyz="0 0 0"/>
+  <link name="welding_torch">
+    <visual>
+      <geometry>
+        <mesh filename="package://weldingscene_description/meshes/torch/torch.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="${pi/2} -0.84997 ${-pi/2}" xyz="0 0 0"/>
       <material name="torch1">
         <color rgba="0.1 0.1 0.5 1.0"/>
       </material>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://weldingscene_description/meshes/collision/torch.stl" scale="0.001 0.001 0.001"/>
-        </geometry>
-        <origin rpy="${pi/2} -0.84997 ${-pi/2}" xyz="0 0 0"/>
-      </collision>
-    </link>
-    <joint name="torch_to_tool0" type="fixed">
-      <parent link="tool0"/>
-      <child link="welding_torch"/>
-      <origin xyz="0 0.048 0.227" rpy="0 0 0"/>
-    </joint> 
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://weldingscene_description/meshes/torch/torch.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="${pi/2} -0.84997 ${-pi/2}" xyz="0 0 0"/>
+    </collision>
+  </link>
 
- 
+  <joint name="torch_to_tool0" type="fixed">
+    <parent link="tool0"/>
+    <child link="welding_torch"/>
+    <origin xyz="0 0.048 0.227" rpy="0 0 0"/>
+  </joint>
 
-    <link name="torchSupport">
-      <visual>
-        <geometry>
-          <mesh filename="package://weldingscene_description/meshes/collision/torchSupport.STL" scale="0.001 0.001 0.001"/>
-        </geometry>
+  <link name="torchSupport">
+    <visual>
+      <geometry>
+        <mesh filename="package://weldingscene_description/meshes/torch/torch_support.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
       <material name="torchSupport1">
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://weldingscene_description/meshes/collision/torchSupport.STL" scale="0.001 0.001 0.001"/>
-        </geometry>
-      </collision>
-    </link>
- 
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://weldingscene_description/meshes/torch/torch_support.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
   <joint name="torchSupport_to_tool0" type="fixed">
     <parent link="tool0"/>
     <child link="torchSupport"/>
     <origin xyz="0.0325 0.0475 0.115" rpy="${-pi*3/2} ${-pi*3/2} ${-pi/2}"/>
-  </joint> 
-
-
- 
-
-
-
+  </joint>
 </robot>

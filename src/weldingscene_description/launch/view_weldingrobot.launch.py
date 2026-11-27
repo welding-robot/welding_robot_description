@@ -12,7 +12,7 @@ def generate_launch_description():
         [FindPackageShare('weldingscene_description'), 'urdf', 'weldingrobot.urdf.xacro']
     )
     rviz_config = PathJoinSubstitution(
-        [FindPackageShare('weldingscene_description'), 'rviz', 'welding_support.rviz']
+        [FindPackageShare('weldingscene_description'), 'rviz', 'welding_scene.rviz']
     )
     robot_description = ParameterValue(
         Command([FindExecutable(name='xacro'), ' ', description_file]), value_type=str
