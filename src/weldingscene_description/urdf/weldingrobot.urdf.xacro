@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <robot name="weldingrobot" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:arg name="torch_tcp_xyz" default="0 0 0"/>
+  <xacro:arg name="torch_tcp_rpy" default="0 -0.84997 -1.5707963267948966"/>
+
   <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
   <xacro:ur5_robot prefix="" joint_limited="true"/>
 
@@ -39,6 +42,14 @@
     <parent link="tool0"/>
     <child link="welding_torch"/>
     <origin xyz="0 0.048 0.227" rpy="0 0 0"/>
+  </joint>
+
+  <link name="torch_tcp"/>
+
+  <joint name="welding_torch_to_tcp" type="fixed">
+    <parent link="welding_torch"/>
+    <child link="torch_tcp"/>
+    <origin xyz="$(arg torch_tcp_xyz)" rpy="$(arg torch_tcp_rpy)"/>
   </joint>
 
   <link name="torchSupport">
